@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CR Belouizdad Digital Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --crb-red: #E50914;
+        --crb-red-dark: #B20710;
+        --crb-white: #ffffff;
+        --crb-dark: #141414;
+        --crb-light-grey: #F5F5F5;
+        --crb-grey: #757575;
+      }
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: var(--crb-red) var(--crb-light-grey);
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--crb-white);
+        color: var(--crb-dark);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .font-display {
+        font-family: 'Teko', sans-serif;
+      }
+      .crb-red { color: var(--crb-red); }
+      .bg-crb-red { background-color: var(--crb-red); }
+      .bg-crb-dark { background-color: var(--crb-dark); }
+      .bg-crb-light-grey { background-color: var(--crb-light-grey); }
+      .bg-crb-white { background-color: var(--crb-white); }
+      .text-crb-red { color: var(--crb-red); }
+      .text-crb-dark { color: var(--crb-dark); }
+      .text-crb-grey { color: var(--crb-grey); }
+      
+      /* Custom Scrollbar */
+      body::-webkit-scrollbar { width: 12px; }
+      body::-webkit-scrollbar-track { background: var(--crb-light-grey); }
+      body::-webkit-scrollbar-thumb {
+        background-color: var(--crb-red);
+        border-radius: 20px;
+        border: 3px solid var(--crb-light-grey);
+      }
+      body::-webkit-scrollbar-thumb:hover { background-color: var(--crb-red-dark); }
+      
+      /* Animations */
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes reveal-up { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes curtain-reveal-left {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); }
+      }
+      @keyframes curtain-reveal-right {
+        from { transform: translateX(0); }
+        to { transform: translateX(100%); }
+      }
+      @keyframes draw-line-across {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+
+      /* Lightbox */
+      .lightbox-overlay { 
+        position: fixed; 
+        inset: 0; 
+        background-color: rgba(17, 17, 17, 0.9); 
+        backdrop-filter: blur(5px); 
+        z-index: 100; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        animation: fadeIn 0.5s; 
+      }
+      .lightbox-content { 
+        position: relative; 
+        max-width: 90vw; 
+        max-height: 90vh; 
+      }
+      .lightbox-content img { 
+        width: auto; 
+        height: auto; 
+        max-width: 100%; 
+        max-height: 100%; 
+        object-fit: contain; 
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+        border-radius: 0.5rem; 
+      }
+      .lightbox-close { 
+        position: absolute; 
+        top: -15px; 
+        right: -15px; 
+        color: var(--crb-dark); 
+        background-color: var(--crb-white); 
+        border-radius: 99px; 
+        width: 40px; 
+        height: 40px; 
+        border: none; 
+        font-size: 1.5rem; 
+        opacity: 0.9; 
+        transition: opacity 0.3s, transform 0.3s; 
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+      }
+      .lightbox-close:hover { 
+        opacity: 1; 
+        transform: rotate(90deg) scale(1.1); 
+      }
+      .lightbox-caption { 
+        position: absolute; 
+        bottom: -50px; 
+        left: 0; 
+        width: 100%; 
+        text-align: center; 
+        color: white; 
+        font-size: 1.5rem; 
+        font-family: 'Teko', sans-serif; 
+        letter-spacing: 2px; 
+        text-shadow: 0 1px 3px rgba(0,0,0,0.5); 
+      }
+      
+      /* Header Underline */
+      .underline-header {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 8px;
+      }
+      .underline-header::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--crb-red);
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: draw-line-across 1s ease-out 0.5s forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
